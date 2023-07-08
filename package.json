@@ -4,9 +4,9 @@
 	"author": "Mark Khramko <markkhramko@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"start": "node ./app/app.js",
+		"start": "babel-node ./app/app.js",
 		"dev": "cross-env NODE_ENV=development nodemon",
-		"production": "cross-env NODE_ENV=production node ./app/app.js",
+		"production": "cross-env NODE_ENV=production babel-node ./app/app.js",
 		"db:migrate": "babel-node ./migrator/start.js",
 		"db:seed": "babel-node ./migrator/seeder.js"
 	},
@@ -22,14 +22,14 @@
 		"jsonwebtoken": "^9.0.0",
 		"mysql2": "^2.1.0",
 		"pug": "^3.0.1",
-		"sequelize": "^5.21.5"
-	},
-	"devDependencies": {
+		"sequelize": "^5.21.5",
 		"@babel/cli": "^7.12.10",
 		"@babel/core": "^7.12.10",
 		"@babel/node": "^7.12.10",
 		"@babel/preset-env": "^7.12.11",
-		"babel-plugin-module-resolver": "^5.0.0",
+		"babel-plugin-module-resolver": "^5.0.0"
+	},
+	"devDependencies": {		
 		"cross-env": "^7.0.3",
 		"nodemon": "^2.0.7"
 	},
