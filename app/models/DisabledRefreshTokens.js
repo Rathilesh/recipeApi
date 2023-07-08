@@ -6,8 +6,8 @@ const database = require('#services/db.service');
 const { Err } = require('#factories/errors');
 
 
-const DisabledRefreshToken = database.define(
-	'DisabledRefreshToken',
+const DisabledRefreshTokens = database.define(
+	'DisabledRefreshTokens',
 	{
 		token: {
 			type: DataTypes.STRING,
@@ -31,14 +31,14 @@ const DisabledRefreshToken = database.define(
 );
 
 // Static methods:
-DisabledRefreshToken.associate = models => {
-	models.DisabledRefreshToken.belongsTo(models.User, {
+DisabledRefreshTokens.associate = models => {
+	models.DisabledRefreshTokens.belongsTo(models.User, {
 		foreignKey: "UserId",
 		as: 'user'
 	});
 }
 
-DisabledRefreshToken.createOrFind = function({ token, userId }) {
+DisabledRefreshTokens.createOrFind = function({ token, userId }) {
 	const where = {
 		token
 	};
@@ -55,7 +55,7 @@ DisabledRefreshToken.createOrFind = function({ token, userId }) {
 	return this.findOrCreate(query);
 }
 
-DisabledRefreshToken.selectAll = function({ token }) {
+DisabledRefreshTokens.selectAll = function({ token }) {
 	const where = {
 		token
 	};
@@ -65,10 +65,10 @@ DisabledRefreshToken.selectAll = function({ token }) {
 // Static methods\
 
 // Instance methods:
-DisabledRefreshToken.prototype.toJSON = function() {
+DisabledRefreshTokens.prototype.toJSON = function() {
 	const values = Object.assign({}, this.get());
 	return values;
 }
 // Instance methods\
 
-module.exports = DisabledRefreshToken;
+module.exports = DisabledRefreshTokens;

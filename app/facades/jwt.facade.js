@@ -1,5 +1,5 @@
 // Reference models.
-const DisabledRefreshToken = require('#models/DisabledRefreshToken');
+const DisabledRefreshTokens = require('#models/DisabledRefreshTokens');
 // JWT service.
 const JWT = require('#services/jwt.service');
 
@@ -109,7 +109,7 @@ async function _isRefreshTokenActive({ refreshToken }) {
 	try {
 		const { id, token } = refreshToken;
 
-		const foundTokens = await DisabledRefreshToken.selectAll({ token });
+		const foundTokens = await DisabledRefreshTokens.selectAll({ token });
 
 		// Prepare output. Check if provided token was not disabled.
 		const isActive = foundTokens.length === 0;
@@ -128,13 +128,13 @@ async function _disableRefreshToken({ refreshToken }) {
 		const { id, token } = refreshToken;
 
 		// Find or create.
-		const [ disabledRefreshToken, created ] = await DisabledRefreshToken.createOrFind({
+		const [ disabledRefreshTokens, created ] = await DisabledRefreshTokens.createOrFind({
 			userId:id,
 			token
 		});
 
 		// Check result,
-		const createdStatus = created === true || !!disabledRefreshToken;
+		const createdStatus = created === true || !!disabledRefreshTokens;
 
 		// Send output.
 		return Promise.resolve([ createdStatus ]);

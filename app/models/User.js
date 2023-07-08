@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 const database = require('#services/db.service');
 
 // Password hasher.
-const bcryptSevice = require('#services/bcrypt.service');
+const bcryptSevice = require('#services/bcrypt.service');  
 
 
 const User = database.define(
@@ -56,7 +56,7 @@ User.beforeValidate((user, options) => {
 
 // Static methods:
 User.associate = (models) => {
-	models.User.hasMany(models.DisabledRefreshToken, {
+	models.User.hasMany(models.DisabledRefreshTokens, {
 		foreignKey: "UserId",
 		as: 'disabledRefreshTokens'
 	});
