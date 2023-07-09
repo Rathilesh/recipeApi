@@ -30,7 +30,7 @@ function RecipesController() {
 				statusCode = 401;
 				break;
 			case('RecipeNotFound'):
-				errorMessage = "Such user doesn't exist";
+				errorMessage = "Such recipe doesn't exist";
 				statusCode = 400;
 				break;
 
@@ -69,8 +69,67 @@ function RecipesController() {
           });
     };
 
+	const _getAllWithSort = async (req, res) => {
+        recipe.getAllWithSort(req.params.sorttype).then((data) => {
+            if(!data){
+              return _processError('RecipeNotFound', req, res);
+            }
+            return createOKResponse({
+				res, 
+				content:{
+					data
+				}
+			});
+    
+          })
+          .catch((err) => {
+            console.error("RecipesController._getAll error: ", err);
+			return _processError(err, req, res);
+          });
+    };
+
+	const _searchedRecipes = async (req, res) => {
+        recipe.searchedRecipes(req.params.query).then((data) => {
+            if(!data){
+              return _processError('RecipeNotFound', req, res);
+            }
+            return createOKResponse({
+				res, 
+				content:{
+					data
+				}
+			});
+    
+          })
+          .catch((err) => {
+            console.error("RecipesController._getAll error: ", err);
+			return _processError(err, req, res);
+          });
+    };
+	const _getOne = async (req, res) => {
+        recipe.getOne(req.params.id).then((data) => {
+            if(!data){
+              return _processError('RecipeNotFound', req, res);
+            }
+            return createOKResponse({
+				res, 
+				content:{
+					data
+				}
+			});
+    
+          })
+          .catch((err) => {
+            console.error("RecipesController._getOne error: ", err);
+			return _processError(err, req, res);
+          });
+    };
+
       return {
-		getAll: _getAll
+		getAll: _getAll,
+		getOne: _getOne,
+		getAllWithSort: _getAllWithSort,
+		searchedRecipes: _searchedRecipes
 	}
     
 

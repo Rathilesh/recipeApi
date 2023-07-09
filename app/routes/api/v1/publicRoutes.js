@@ -10,4 +10,11 @@ module.exports = {
 
 	// Recipe
 	'GET /recipes': 'RecipesController.getAll',
+	'GET /recipes/:id': 'RecipesController.getOne',
+	'GET /sort/recipes/:sorttype': 'RecipesController.getAllWithSort',
+	'GET /search/recipes/:query': 'RecipesController.searchedRecipes',
+
+	//Category
+	'GET /categories': 'CategoriesController.getAll',
+	'GET /category/:id': 'CategoriesController.getOne', 
 };

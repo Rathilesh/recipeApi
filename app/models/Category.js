@@ -33,9 +33,10 @@ const Category = database.define(
 // Static methods:
 
 Category.associate = (models) => {
+	console.log('models',models)
 	models.Category.hasMany(models.Recipe, {
 		foreignKey: "categoryId",
-		as: 'category'
+		as: 'recipe'
 	});
 }
 
